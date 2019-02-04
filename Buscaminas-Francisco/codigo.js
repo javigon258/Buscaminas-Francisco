@@ -81,8 +81,8 @@ let buscaminas = {
         console.table(buscaminas.tableroDescubierto);
 
         //Tablero jugable.
-        console.log("Tablero Jugable");
-        console.table(buscaminas.tableroJugable);
+        //console.log("Tablero Jugable");
+        //console.table(buscaminas.tableroJugable);
     },
 
     /**
@@ -154,54 +154,56 @@ let buscaminas = {
      * 
      */
     despejar(x, y) {
-        if (x > 0 && y > 0) {
-            if (buscaminas.tableroJugable[x - 1][y - 1] !== "🏴" &&
-                buscaminas.tableroCasillaPulsada[x - 1][y - 1] !== "c-pulsada")
-                buscaminas.picar(x - 1, y - 1);
-        }
+        if (buscaminas.banderasCercanas(x, y) === buscaminas.tableroDescubierto[x][y]) {
 
-        if (y > 0) {
-            if (buscaminas.tableroJugable[x][y - 1] !== "🏴" &&
-                buscaminas.tableroCasillaPulsada[x][y - 1] !== "c-pulsada")
-                buscaminas.picar(x, y - 1);
-        }
+            if (x > 0 && y > 0) {
+                if (buscaminas.tableroJugable[x - 1][y - 1] !== "🏴" &&
+                    buscaminas.tableroCasillaPulsada[x - 1][y - 1] !== "c-pulsada")
+                    buscaminas.picar(x - 1, y - 1);
+            }
 
-        if (y > 0 && x < buscaminas.filas - 1) {
-            if (buscaminas.tableroJugable[x + 1][y - 1] !== "🏴" &&
-                buscaminas.tableroCasillaPulsada[x + 1][y - 1] !== "c-pulsada")
-                buscaminas.picar(x + 1, y - 1);
-        }
+            if (y > 0) {
+                if (buscaminas.tableroJugable[x][y - 1] !== "🏴" &&
+                    buscaminas.tableroCasillaPulsada[x][y - 1] !== "c-pulsada")
+                    buscaminas.picar(x, y - 1);
+            }
 
-        if (x > 0) {
-            if (buscaminas.tableroJugable[x - 1][y] !== "🏴" &&
-                buscaminas.tableroCasillaPulsada[x - 1][y] !== "c-pulsada")
-                buscaminas.picar(x - 1, y);
-        }
+            if (y > 0 && x < buscaminas.filas - 1) {
+                if (buscaminas.tableroJugable[x + 1][y - 1] !== "🏴" &&
+                    buscaminas.tableroCasillaPulsada[x + 1][y - 1] !== "c-pulsada")
+                    buscaminas.picar(x + 1, y - 1);
+            }
 
-        if (x < buscaminas.filas - 1) {
-            if (buscaminas.tableroJugable[x + 1][y] !== "🏴" &&
-                buscaminas.tableroCasillaPulsada[x + 1][y] !== "c-pulsada")
-                buscaminas.picar(x + 1, y);
-        }
+            if (x > 0) {
+                if (buscaminas.tableroJugable[x - 1][y] !== "🏴" &&
+                    buscaminas.tableroCasillaPulsada[x - 1][y] !== "c-pulsada")
+                    buscaminas.picar(x - 1, y);
+            }
 
-        if (y < buscaminas.columnas - 1) {
-            if (buscaminas.tableroJugable[x][y + 1] !== "🏴" &&
-                buscaminas.tableroCasillaPulsada[x][y + 1] !== "c-pulsada")
-                buscaminas.picar(x, y + 1);
-        }
+            if (x < buscaminas.filas - 1) {
+                if (buscaminas.tableroJugable[x + 1][y] !== "🏴" &&
+                    buscaminas.tableroCasillaPulsada[x + 1][y] !== "c-pulsada")
+                    buscaminas.picar(x + 1, y);
+            }
 
-        if (x < buscaminas.filas - 1 && y < buscaminas.columnas - 1) {
-            if (buscaminas.tableroJugable[x + 1][y + 1] !== "🏴" &&
-                buscaminas.tableroCasillaPulsada[x + 1][y + 1] !== "c-pulsada")
-                buscaminas.picar(x + 1, y + 1);
-        }
+            if (y < buscaminas.columnas - 1) {
+                if (buscaminas.tableroJugable[x][y + 1] !== "🏴" &&
+                    buscaminas.tableroCasillaPulsada[x][y + 1] !== "c-pulsada")
+                    buscaminas.picar(x, y + 1);
+            }
 
-        if (x > 0 && y < buscaminas.columnas - 1) {
-            if (buscaminas.tableroJugable[x - 1][y + 1] !== "🏴" &&
-                buscaminas.tableroCasillaPulsada[x - 1][y + 1] !== "c-pulsada")
-                buscaminas.picar(x - 1, y + 1);
-        }
+            if (x < buscaminas.filas - 1 && y < buscaminas.columnas - 1) {
+                if (buscaminas.tableroJugable[x + 1][y + 1] !== "🏴" &&
+                    buscaminas.tableroCasillaPulsada[x + 1][y + 1] !== "c-pulsada")
+                    buscaminas.picar(x + 1, y + 1);
+            }
 
+            if (x > 0 && y < buscaminas.columnas - 1) {
+                if (buscaminas.tableroJugable[x - 1][y + 1] !== "🏴" &&
+                    buscaminas.tableroCasillaPulsada[x - 1][y + 1] !== "c-pulsada")
+                    buscaminas.picar(x - 1, y + 1);
+            }
+        }
     },
 
     //------------------------------------COMPROBACIONES DE VICTORIA---------------------------------------
@@ -267,7 +269,7 @@ let buscaminas = {
                 buscaminas.minas = 99;
                 break;
             default:
-                buscaminas.banderas = 5;
+                buscaminas.banderas = 10;
                 buscaminas.filas = 8;
                 buscaminas.columnas = 8;
                 buscaminas.minas = 10;
