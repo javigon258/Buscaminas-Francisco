@@ -180,12 +180,11 @@ let buscaminasGui = {
                //Si gano EFECTO
                if (buscaminas.banderaGanado) {
                   $id.css({
-                     "background-color": buscaminasGui.getRandomColor,
+                     "background-color": buscaminasGui.coloresAleatorios,
                      "transition-duration": "0" + contador + "s",
                      "opacity": ".9",
                      "animation-duration": "5s",
-                     "animation-name": "agrandar",
-
+                     "animation-name": "agrandar"
                   });
                   //Si pierdo efecto.
                } else {
@@ -196,7 +195,7 @@ let buscaminasGui = {
                      "animation-iteration-count": "infinite", 
                      "animation-direction": "reverse",
                      "position": "relative",
-                     "animation-name": "direction",
+                     "animation-name": "direction"
                   });
                }
 
