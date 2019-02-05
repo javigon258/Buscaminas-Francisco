@@ -117,6 +117,9 @@ let buscaminasGui = {
       buscaminasGui.filaColumna(id);
       let $id = $("#" + $fila + "-" + $columna);
 
+      if(buscaminas.tableroCasillaPulsada[$fila][$columna] !== "c-pulsada"){
+
+      
       try {
          //Selecciono el botón derecho para marcar en el tablero
          if (event.buttons === 2) {
@@ -139,6 +142,9 @@ let buscaminasGui = {
       } catch (error) {
          $("span").text(error.message);
       }
+      }else{
+            console.log("nope")
+      }
    },
 
    /**
@@ -148,6 +154,7 @@ let buscaminasGui = {
     */
    despejar(event, id) {
       buscaminasGui.filaColumna(id);
+      let $id = $("#" + $fila + "-" + $columna);
 
       try {
          //Selecciono botón izquierdo y derecho para despejar en el tablero
@@ -180,11 +187,12 @@ let buscaminasGui = {
                //Si gano EFECTO
                if (buscaminas.banderaGanado) {
                   $id.css({
-                     "background-color": buscaminasGui.coloresAleatorios,
+                     "background-color": buscaminasGui.getRandomColor,
                      "transition-duration": "0" + contador + "s",
                      "opacity": ".9",
                      "animation-duration": "5s",
-                     "animation-name": "agrandar"
+                     "animation-name": "agrandar",
+
                   });
                   //Si pierdo efecto.
                } else {
@@ -195,7 +203,7 @@ let buscaminasGui = {
                      "animation-iteration-count": "infinite", 
                      "animation-direction": "reverse",
                      "position": "relative",
-                     "animation-name": "direction"
+                     "animation-name": "direction",
                   });
                }
 

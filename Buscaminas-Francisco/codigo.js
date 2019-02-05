@@ -139,10 +139,7 @@ let buscaminas = {
             buscaminas.banderas++;
             buscaminas.mostrar();
 
-        } else {
-            buscaminas.comprobarGanadorBanderas();
-            throw new Error("No se pueden colocar");
-        }
+        } 
     },
 
     /**
