@@ -190,7 +190,8 @@ let buscaminasGui = {
                      "background-color": buscaminasGui.getRandomColor,
                      "transition-duration": "0" + contador + "s",
                      "opacity": ".9",
-                     "animation-duration": "5s",
+                     "animation-duration": "2s",
+                     "animation-iteration-count": "infinite", 
                      "animation-name": "agrandar",
 
                   });

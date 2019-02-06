@@ -57,6 +57,7 @@ span{
         transform: scale(0.2);
     }
     to {
+        background-color: green;
         transform: scale(1);
     }
 }
