@@ -52,6 +52,7 @@ let buscaminas = {
     banderaFinalizar: false,
 
     nivel: "",
+    casillaContigua: new Set(),
     casillaPulsada: new Set(),
 
     //----------------------------------------------MÉTODOS OBLIGATORIOS------------------------------------
@@ -151,6 +152,10 @@ let buscaminas = {
      * 
      */
     despejar(x, y) {
+
+        //Limpio el mapeado de las casillas contiguas ( papardeo )
+        buscaminas.casillaContigua.clear();
+
         if (buscaminas.banderasCercanas(x, y) === buscaminas.tableroDescubierto[x][y]) {
 
             if (x > 0 && y > 0) {
@@ -200,6 +205,56 @@ let buscaminas = {
                     buscaminas.tableroCasillaPulsada[x - 1][y + 1] !== "c-pulsada")
                     buscaminas.picar(x - 1, y + 1);
             }
+            //AÑADO AL MAP LAS CASILLAS CONTIGUAS
+        } else{
+
+            if (x > 0 && y > 0) {
+                if (buscaminas.tableroJugable[x - 1][y - 1] !== "🏴" &&
+                    buscaminas.tableroCasillaPulsada[x - 1][y - 1] !== "c-pulsada")
+                    buscaminas.casillaContigua.add((x-1) + "-" + (y-1));
+            }
+
+            if (y > 0) {
+                if (buscaminas.tableroJugable[x][y - 1] !== "🏴" &&
+                    buscaminas.tableroCasillaPulsada[x][y - 1] !== "c-pulsada")
+                    buscaminas.casillaContigua.add((x) + "-" + (y-1));
+                }
+
+            if (y > 0 && x < buscaminas.filas - 1) {
+                if (buscaminas.tableroJugable[x + 1][y - 1] !== "🏴" &&
+                    buscaminas.tableroCasillaPulsada[x + 1][y - 1] !== "c-pulsada")
+                    buscaminas.casillaContigua.add((x+1) + "-" + (y-1));
+                }
+
+            if (x > 0) {
+                if (buscaminas.tableroJugable[x - 1][y] !== "🏴" &&
+                    buscaminas.tableroCasillaPulsada[x - 1][y] !== "c-pulsada")
+                    buscaminas.casillaContigua.add((x-1) + "-" + (y));
+                }
+
+            if (x < buscaminas.filas - 1) {
+                if (buscaminas.tableroJugable[x + 1][y] !== "🏴" &&
+                    buscaminas.tableroCasillaPulsada[x + 1][y] !== "c-pulsada")
+                    buscaminas.casillaContigua.add((x+1) + "-" + (y));
+                }
+
+            if (y < buscaminas.columnas - 1) {
+                if (buscaminas.tableroJugable[x][y + 1] !== "🏴" &&
+                    buscaminas.tableroCasillaPulsada[x][y + 1] !== "c-pulsada")
+                    buscaminas.casillaContigua.add((x) + "-" + (y+1));
+                }
+
+            if (x < buscaminas.filas - 1 && y < buscaminas.columnas - 1) {
+                if (buscaminas.tableroJugable[x + 1][y + 1] !== "🏴" &&
+                    buscaminas.tableroCasillaPulsada[x + 1][y + 1] !== "c-pulsada")
+                    buscaminas.casillaContigua.add((x+1) + "-" + (y+1));
+                }
+
+            if (x > 0 && y < buscaminas.columnas - 1) {
+                if (buscaminas.tableroJugable[x - 1][y + 1] !== "🏴" &&
+                    buscaminas.tableroCasillaPulsada[x - 1][y + 1] !== "c-pulsada")
+                    buscaminas.casillaContigua.add((x-1) + "-" + (y+1));
+                }
         }
     },
 
