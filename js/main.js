@@ -11,7 +11,6 @@
 let $buscaminasInterfaz;
 let $fila;
 let $columna;
-let cronometro;
 
 let initInterfaz = function () {
    $("#botonesDificultad").change(buscaminasGui.iniciarJuego);
@@ -45,7 +44,7 @@ let buscaminasGui = {
     * Genero el tablero con display grid.
     */
    generarTableroGui() {
-
+      let $input;
       $buscaminasInterfaz.css({
          "display": "grid",
          "grid-template-columns": "repeat(" + buscaminas.columnas + " ,1fr)",
@@ -55,7 +54,7 @@ let buscaminasGui = {
       for (let i = 0; i < buscaminas.filas; i++) {
          for (let j = 0; j < buscaminas.columnas; j++) {
 
-            let $input = $(`<input type='text' id='${i}-${j}' readOnly></input>`);
+            $input = $(`<input type='text' id='${i}-${j}' readOnly></input>`);
             $buscaminasInterfaz.append($input);
 
          }

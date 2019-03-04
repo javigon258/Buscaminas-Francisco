@@ -34,7 +34,7 @@
  */
 
 //Objeto literal
-let buscaminas = {
+let buscaminasObjeto = {
     //Tableros
     tableroDescubierto: [],
     tableroDescubiertoCopia: [], //Necesario para las minas
@@ -64,7 +64,7 @@ let buscaminas = {
      * 1º método obligatorio
      */
     init() {
-        //buscaminas.pedirNivel();
+        buscaminas.pedirNivel();
         buscaminas.generarTableros();
         buscaminas.generaMinas();
         buscaminas.descubrirNumeros();
@@ -79,13 +79,8 @@ let buscaminas = {
     mostrar() {
         console.clear();
         //Muestro el tablero mostrando las minas para las pruebas.
-        console.log("Tablero Descubierto - Pruebas");
         console.table(buscaminas.tableroDescubierto);
         console.log(buscaminas.arrayMinas)
-
-        //Tablero jugable.
-        //console.log("Tablero Jugable");
-        //console.table(buscaminas.tableroJugable);
     },
 
     /**
@@ -142,7 +137,7 @@ let buscaminas = {
             buscaminas.banderas++;
             buscaminas.mostrar();
 
-        } 
+        }
     },
 
     /**
@@ -208,55 +203,55 @@ let buscaminas = {
                     buscaminas.picar(x - 1, y + 1);
             }
             //AÑADO AL MAP LAS CASILLAS CONTIGUAS
-        } else{
+        } else {
 
             if (x > 0 && y > 0) {
                 if (buscaminas.tableroJugable[x - 1][y - 1] !== "🏴" &&
                     buscaminas.tableroCasillaPulsada[x - 1][y - 1] !== "c-pulsada")
-                    buscaminas.casillaContigua.add((x-1) + "-" + (y-1));
+                    buscaminas.casillaContigua.add((x - 1) + "-" + (y - 1));
             }
 
             if (y > 0) {
                 if (buscaminas.tableroJugable[x][y - 1] !== "🏴" &&
                     buscaminas.tableroCasillaPulsada[x][y - 1] !== "c-pulsada")
-                    buscaminas.casillaContigua.add((x) + "-" + (y-1));
-                }
+                    buscaminas.casillaContigua.add((x) + "-" + (y - 1));
+            }
 
             if (y > 0 && x < buscaminas.filas - 1) {
                 if (buscaminas.tableroJugable[x + 1][y - 1] !== "🏴" &&
                     buscaminas.tableroCasillaPulsada[x + 1][y - 1] !== "c-pulsada")
-                    buscaminas.casillaContigua.add((x+1) + "-" + (y-1));
-                }
+                    buscaminas.casillaContigua.add((x + 1) + "-" + (y - 1));
+            }
 
             if (x > 0) {
                 if (buscaminas.tableroJugable[x - 1][y] !== "🏴" &&
                     buscaminas.tableroCasillaPulsada[x - 1][y] !== "c-pulsada")
-                    buscaminas.casillaContigua.add((x-1) + "-" + (y));
-                }
+                    buscaminas.casillaContigua.add((x - 1) + "-" + (y));
+            }
 
             if (x < buscaminas.filas - 1) {
                 if (buscaminas.tableroJugable[x + 1][y] !== "🏴" &&
                     buscaminas.tableroCasillaPulsada[x + 1][y] !== "c-pulsada")
-                    buscaminas.casillaContigua.add((x+1) + "-" + (y));
-                }
+                    buscaminas.casillaContigua.add((x + 1) + "-" + (y));
+            }
 
             if (y < buscaminas.columnas - 1) {
                 if (buscaminas.tableroJugable[x][y + 1] !== "🏴" &&
                     buscaminas.tableroCasillaPulsada[x][y + 1] !== "c-pulsada")
-                    buscaminas.casillaContigua.add((x) + "-" + (y+1));
-                }
+                    buscaminas.casillaContigua.add((x) + "-" + (y + 1));
+            }
 
             if (x < buscaminas.filas - 1 && y < buscaminas.columnas - 1) {
                 if (buscaminas.tableroJugable[x + 1][y + 1] !== "🏴" &&
                     buscaminas.tableroCasillaPulsada[x + 1][y + 1] !== "c-pulsada")
-                    buscaminas.casillaContigua.add((x+1) + "-" + (y+1));
-                }
+                    buscaminas.casillaContigua.add((x + 1) + "-" + (y + 1));
+            }
 
             if (x > 0 && y < buscaminas.columnas - 1) {
                 if (buscaminas.tableroJugable[x - 1][y + 1] !== "🏴" &&
                     buscaminas.tableroCasillaPulsada[x - 1][y + 1] !== "c-pulsada")
-                    buscaminas.casillaContigua.add((x-1) + "-" + (y+1));
-                }
+                    buscaminas.casillaContigua.add((x - 1) + "-" + (y + 1));
+            }
         }
     },
 
@@ -270,10 +265,10 @@ let buscaminas = {
         let contador = 0;
         for (let i = 0; i < buscaminas.filas; i++) {
             for (let j = 0; j < buscaminas.columnas; j++) {
-                if (buscaminas.tableroCasillaPulsada[i][j] === "c-pulsada"){
+                if (buscaminas.tableroCasillaPulsada[i][j] === "c-pulsada") {
                     contador++;
                 }
-                   
+
             }
         }
         return contador;
@@ -371,8 +366,11 @@ let buscaminas = {
             }
             buscaminas.tableroDescubierto[fila][columna] = "x";
             buscaminas.tableroDescubiertoCopia[fila][columna] = "x";
-            buscaminas.arrayMinas.push({"i":fila,"j":columna});
-            
+            buscaminas.arrayMinas.push({
+                "i": fila,
+                "j": columna
+            });
+
         }
         //console.log(buscaminas.arrayMinas);
     },
@@ -508,7 +506,6 @@ let buscaminas = {
                     nBanderas++;
             }
         }
-
         return nBanderas;
     },
 
@@ -526,3 +523,6 @@ let buscaminas = {
         }
     }
 };
+buscaminas = (function () {
+    return buscaminasObjeto;
+})();
